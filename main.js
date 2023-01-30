@@ -14,18 +14,17 @@ let foods = [
   { name: "ice cream", calories: 700, carbs: 20, fat: 20 },
 ];
 
-const total = foods.reduce(function (buckets, item) {
-  let calories = item.calories;
-  let carbs = item.carbs;
-  let fat = item.fat;
+function groupBy(objectArray, property) {
+  return objectArray.reduce((acc, obj) => {
+    const key = obj[property];
+    const curGroup = acc[key] ?? [];
 
-  buckets["calories"] += calories;
-  buckets["carbs"] += carbs;
-  buckets["fat"] += fat;
-  return buckets;
-});
+    return { ...acc, [key]: [...curGroup, obj] };
+  }, {});
+}
 
-console.log(total);
+const groupedFoods = groupBy(foods, "name");
+console.log(groupedFoods);
 
 const array = [-3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 
