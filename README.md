@@ -1,1 +1,1 @@
-Attached ins the main.js file are the 3 methods required for the assignment
+Attached in the main.js file are the 3 functions utilizing the methods required for the assignment
