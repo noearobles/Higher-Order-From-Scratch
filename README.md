@@ -1,0 +1,1 @@
+Attached ins the main.js file are the 3 methods required for the assignment
