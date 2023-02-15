@@ -1,37 +1,49 @@
-const array1 = [1, 4, 9, 16];
+const mapFunction = (arr, func) => {
+  let newArr = [];
+  for (let i = 0; i < arr.length; i++) {
+    let pos = arr[i];
+    newArr.push(func(pos, i, arr));
+  }
+  return newArr;
+};
 
-// Pass a function to map
-const map1 = array1.map((x) => x * 2);
+const arr1 = [1, 9, 9, 4];
 
-console.log(map1);
-// Expected output: Array [2, 8, 18, 32]
+const doubledArr = mapFunction(arr1, (x) => x * 2);
+const readableArr = doubledArr.toString();
+//expected output: 2,18,18,4
+console.log("mapFunction(arr1)", readableArr);
 
-let foods = [
-  { name: "steak", calories: 800, carbs: 10, fat: 30 },
-  { name: "fruit", calories: 200, carbs: 20, fat: 0 },
-  { name: "salad", calories: 100, carbs: 0, fat: 5 },
-  { name: "chips", calories: 300, carbs: 10, fat: 10 },
-  { name: "ice cream", calories: 700, carbs: 20, fat: 20 },
-];
+const reduceFunction = (arr, func, initValue = 0) => {
+  let accumulator = arr[0 + initValue];
+  let currentValue;
+  for (let i = initValue + 1; i < arr.length; i++) {
+    currentValue = arr[i];
+    accumulator = func(accumulator, currentValue);
+  }
+  return accumulator;
+};
 
-const total = foods.reduce(
-  (acc, curVal) => `${acc} ${curVal.name} : ${curVal.calories},`,
-  "Your food items and their calories:"
+const arr2 = [1, 9, 9, 4];
+const sumOfValues = reduceFunction(
+  arr2,
+  (accumulator, currentValue) => accumulator + currentValue
 );
+//expected output: 23
+console.log("reduceFunction(arr2)", sumOfValues);
 
-console.log(total);
-// steak : 800, fruit : 200, salad : 100, chips : 300, ice cream : 700,
+const filterFunction = (arr, num) => {
+  let newArr = [];
 
-
-const array = [-3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-
-function isPrime(num) {
-  for (let i = 2; num > i; i++) {
-    if (num % i === 0) {
-      return false;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] > num) {
+      newArr.push(arr[i]);
     }
   }
-  return num > 1;
-}
 
-console.log(array.filter(isPrime)); // [2, 3, 5, 7, 11, 13]
+  return newArr;
+};
+
+const arr3 = [65, 16, 4, 9, 21, 1, 68];
+//expected output (3) [65, 21, 68]
+console.log(filterFunction(arr3, 16));
